@@ -33,15 +33,16 @@ function showCart() {
     let tr = document.createElement('tr');
     myTable.appendChild(tr);
 
-    // TODO: Create a TD for the delete link, quantity,  and the item
+    // DONE: Create a TD for the delete link, quantity,  and the item
     let deleteLink = document.createElement('td');
+    deleteLink.setAttribute('class', 'deleteBtn');
     let quantity = document.createElement('td');
     let item = document.createElement('td');
-    deleteLink.textContent = '###';
+    deleteLink.textContent = 'Delete';
     quantity.textContent = `${cart.items[i].quantity}`;
     item.textContent = `${cart.items[i].product}`;
 
-    // TODO: Add the TR to the TBODY and each of the TD's to the TR
+    // DONE: Add the TR to the TBODY and each of the TD's to the TR
     tr.appendChild(deleteLink);
     tr.appendChild(quantity);
     tr.appendChild(item);
@@ -49,10 +50,13 @@ function showCart() {
 }
 
 function removeItemFromCart(event) {
-
   // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
+    event.target.cart.removeItem(this);
   // TODO: Save the cart back to local storage
+    let stringifiedProducts = JSON.stringify(cart.items);
+    localStorage.setItem('cart', stringifiedProducts);
   // TODO: Re-draw the cart table
+    showCart();
 
 }
 
